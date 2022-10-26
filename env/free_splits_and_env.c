@@ -1,17 +1,19 @@
-#include "builtin.h"
+#include "../builtin.h"
 
-void	free_env(t_env **list)
+void	free_env(t_env *list)
 {
 	t_env	*head;
 	t_env	*tmp;
 
-	head = *list;
+	head = list;
 	while (head != NULL)
 	{
-		free((t_env *)head->env_str);
+		if(head->env_str)
+			free((t_env *)head->env_str);
 		tmp = head;
 		head = head->next;
-		free_splits(tmp->var);
+		if(tmp->var)
+			free_splits(tmp->var);
 		free(tmp);
 	}
 	free(head);

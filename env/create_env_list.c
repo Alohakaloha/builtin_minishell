@@ -1,9 +1,9 @@
-#include "builtin.h"
+#include "../builtin.h"
 
 /* last element of the list */
-struct s_env	*last_node(t_env *head)
+t_env *last_node(t_env *head)
 {
-	t_env	*tmp;
+	t_env *tmp;
 
 	tmp = head;
 	while (tmp->next)
@@ -15,11 +15,10 @@ struct s_env	*last_node(t_env *head)
 	return (tmp);
 }
 
-void	add_to_end(t_env **list, t_env *new)
+void add_to_end(t_env **list, t_env *new)
 {
-	t_env	*n;
-
-	if (*list)
+	t_env *n;
+	if (*list != NULL)
 	{
 		n = last_node(*list);
 		n->next = new;
@@ -36,8 +35,8 @@ void	add_to_end(t_env **list, t_env *new)
 should be removed, when no testing is needed. */
 t_env *new_env_node(char *string)
 {
-	t_env	*new_env;
-	
+	t_env *new_env;
+
 	new_env= (t_env *)malloc(sizeof(*new_env));
 	new_env->env_str = ft_strdup(string);
 	new_env->var = ft_split(string, '=');
@@ -48,16 +47,16 @@ t_env *new_env_node(char *string)
 	return (new_env);
 }
 
-void	create_env_list(t_env	**env_list, char **envp)
+void create_env_list(t_env **env, char **envp)
 {
-	int		index;
-	t_env 	*element;
+	int index;
+	t_env *element;
 
 	index = 0;
 	while (envp[index])
 	{
 		element = new_env_node(envp[index]);
-		add_to_end(env_list, element);
+		add_to_end(env, element);
 		index++;
 	}
 }
@@ -69,7 +68,7 @@ e.g. :"ZZ=..."
 It can happen, that export can add a variable without value.
 In this case export shows the variable but the bash cmd ENV doesn't.
 */
-void	print_env(t_env *head)
+void print_env(t_env *head)
 {
 	t_env *tmp;
 
@@ -77,7 +76,7 @@ void	print_env(t_env *head)
 	printf("\n\n\nenvironment_list\n\n\n");
 	while (tmp != NULL)
 	{
-		if(tmp->var[0])
+		if (tmp->var[0])
 			printf("??? = %s\n", tmp->env_str);
 		tmp = tmp->next;
 	}

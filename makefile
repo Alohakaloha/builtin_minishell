@@ -4,11 +4,13 @@ CC = gcc
 CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 
-SRCS = 	create_env_list.c \
-		free_splits_and_env.c \
+SRCS = 	env/create_env_list.c \
+		env/free_splits_and_env.c \
+		export/export_cmd_0.c \
+		export/export_cmd_1.c \
+		export/export_utils.c \
+		cd/cd.c \
 		libft_functions.c \
-		export_cmd.c \
-		export_utils.c \
 		utils.c \
 		main.c \
 

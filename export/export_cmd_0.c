@@ -1,4 +1,4 @@
-#include "builtin.h"
+#include "../builtin.h"
 
 void	print_by_index(t_env *env)
 {
@@ -14,16 +14,9 @@ void	print_by_index(t_env *env)
 		while(current->index != nbr)
 			current = current->next;
 		if(current->var[1])
-		printf("declare -x %s=\"%s\"\n", current->var[0], current->var[1]);
+			printf("declare -x %s=\"%s\"\n", current->var[0], current->var[1]);
 		nbr++;
 	}
-}
-
-void	export_no_arg(t_env *env)
-{
-	add_index(env);
-	print_by_index(env);
-	reset_index(env);
 }
 
 /*
@@ -49,7 +42,13 @@ char	*unchecked_str(t_env *env, char *biggest)
 			biggest = current->env_str;
 		else
 			current = current->next;
-
 	}
 	return (biggest);
+}
+
+void	export_no_arg(t_env *env)
+{
+	add_index(env);
+	print_by_index(env);
+	reset_index(env);
 }

@@ -1,4 +1,4 @@
-#include "builtin.h"
+#include "../builtin.h"
 
 int	check_size(t_env *list)
 {

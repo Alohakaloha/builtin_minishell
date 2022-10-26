@@ -162,3 +162,22 @@ char	*ft_strdup(const char *src)
 	str[i] = 0;
 	return (str);
 }
+
+char	*ft_strchr(const char *str, int c)
+{
+	unsigned char	ch;
+
+	if (str == NULL)
+		return (NULL);
+	ch = c;
+	while (*str)
+	{
+		if (*str == ch)
+			return ((char *)str);
+		str++;
+	}
+	if (*str == ch)
+		return ((char *)str);
+	str = NULL;
+	return ((char *)str);
+}
